@@ -28,10 +28,7 @@ jobs:
           org: ${{ vars.FLY_ORG }}
           region: ${{ vars.FLY_REGION }}
           name: pr-${{ github.event.number }}-${{ github.event.repository.name }}
-          cpu: 1
-          cpukind: shared
-          memory: 256
-          ha: false
+          config: ./fly.pr.toml
       - name: Clean up GitHub environment
         uses: strumwolf/delete-deployment-environment@v2
         if: ${{ github.event.action == 'closed' }}
