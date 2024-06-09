@@ -1,0 +1,31 @@
+# fly.toml app configuration file generated for next-fly on 2024-06-09T19:10:06+02:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = 'next-fly'
+primary_region = 'ams'
+
+[build]
+  dockerfile = 'Dockerfile'
+
+[env]
+  PORT = '8080'
+
+[http_service]
+  internal_port = 8080
+  force_https = true
+  auto_stop_machines = true
+  auto_start_machines = true
+  min_machines_running = 0
+
+  [http_service.concurrency]
+    type = 'requests'
+    hard_limit = 250
+    soft_limit = 200
+
+[[vm]]
+  size = 'shared-cpu-1x'
+  memory = '256MB'
+  cpu_kind = 'shared'
+  cpus = 1
