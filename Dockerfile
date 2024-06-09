@@ -47,4 +47,8 @@ COPY --from=installer --chown=nextjs:nodejs /app/apps/web/.next/standalone ./
 COPY --from=installer --chown=nextjs:nodejs /app/apps/web/.next/static ./apps/web/.next/static
 COPY --from=installer --chown=nextjs:nodejs /app/apps/web/public ./apps/web/public
 
+ARG PORT=8080
+ENV PORT=$PORT
+EXPOSE $PORT
+
 CMD node apps/web/server.js
