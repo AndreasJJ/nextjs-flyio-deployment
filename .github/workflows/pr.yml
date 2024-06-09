@@ -28,16 +28,19 @@ jobs:
           org: ${{ vars.FLY_ORG }}
           region: ${{ vars.FLY_REGION }}
           name: pr-${{ github.event.number }}-${{ github.event.repository.name }}
+          cpu: 1
+          cpukind: shared
+          memory: 256
+          ha: false
       - name: Clean up GitHub environment
         uses: strumwolf/delete-deployment-environment@v2
         if: ${{ github.event.action == 'closed' }}
         with:
           # ⚠️ The provided token needs permission for admin write:org
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.GH_PERSONAL_TOKEN }}
           environment: pr-${{ github.event.number }}
 
   comment:
-    if: ${{ github.event.created == false }}
     runs-on: ubuntu-latest
     needs: [ deploy_app ]
     permissions:
