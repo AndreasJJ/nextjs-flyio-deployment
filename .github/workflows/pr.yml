@@ -37,7 +37,7 @@ jobs:
           environment: pr-${{ github.event.number }}
 
   comment:
-    if: ${{ github.event.created == false }}
+    if: ${{ github.event.created == true }}
     runs-on: ubuntu-latest
     needs: [ deploy_app ]
     permissions:
